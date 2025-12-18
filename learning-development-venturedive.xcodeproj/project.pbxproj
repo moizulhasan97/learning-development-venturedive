@@ -13,8 +13,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF3B6A2B2EF44E96005AD793 /* learning-development-venturedive */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			name = "learning-development-venturedive";
-			path = "../../../moizulhassan/Desktop/learning-development-venturedive/learning-development-venturedive";
+			path = "learning-development-venturedive";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */

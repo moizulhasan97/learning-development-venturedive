@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		AF3B6A292EF44E96005AD793 /* learning-development-venturedive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learning-development-venturedive.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF3B6A292EF44E96005AD793 /* learning-development-venturedive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "learning-development-venturedive.app"; path = "/Users/moiz.hasan/Desktop/Moiz/Projects/learning-development-venturedive/build/Debug-iphoneos/learning-development-venturedive.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				AF3B6A2B2EF44E96005AD793 /* learning-development-venturedive */,
-				AF3B6A2A2EF44E96005AD793 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		AF3B6A2A2EF44E96005AD793 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF3B6A292EF44E96005AD793 /* learning-development-venturedive.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = AF3B6A202EF44E96005AD793;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = AF3B6A2A2EF44E96005AD793 /* Products */;
+			productRefGroup = AF3B6A202EF44E96005AD793;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

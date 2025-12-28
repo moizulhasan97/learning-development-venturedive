@@ -148,3 +148,167 @@ Please update the changes that you have mentioned in the existing files.
 
 **Evidence**
 - Recording: prompt-01-apply-suggested-changes.mov
+
+---
+
+## Prompt 5 - Add Unit Tests (Clean Architecture, Deterministic)
+
+**Goal**
+- Add comprehensive, deterministic unit tests for the app while preserving Clean Architecture, existing async/await use cases, and domain models. Demonstrate controlled prompt engineering to guide AI-assisted test generation without introducing new models, networking, or architectural drift.
+
+**Prompt**
+- I added a Unit Test target named learning-development-venturediveTests.
+I will create folders and files manually in Xcode, so DO NOT create files or folders automatically.
+
+Hard constraints (must follow)
+    1.    Use my existing types exactly — do not invent new models or rename anything:
+
+    •    Domain models: Film, Person
+    •    Domain protocols: FilmRepository, PeopleRepository, GetFilmsUseCase, GetFilmDetailUseCase, GetPeopleUseCase
+    •    Domain implementations: DefaultGetFilmsUseCase, DefaultGetFilmDetailUseCase, DefaultGetPeopleUseCase
+    •    Presentation: LoadState<T>, MovieListViewModel (with State), MovieDetailViewModel
+    •    Data: RemoteFilmRepository, RemotePeopleRepository, FilmDTO, PersonDTO, GhibliAPIClient, APIError
+
+    2.    Do NOT introduce any Movie model, GetMoviesUseCase, or AnyPublisher-based use cases. My use cases are async throws.
+    3.    Tests must be deterministic: no real networking, no sleep(), no time-based flakiness.
+    4.    Keep architecture intact (Presentation/Domain/Data).
+
+Output format
+    1.    First output a Test File Manifest listing the exact test files I should create, for example:
+
+    •    learning-development-venturediveTests/TestDoubles/FilmRepositorySpy.swift
+    •    learning-development-venturediveTests/TestDoubles/PeopleRepositorySpy.swift
+    •    learning-development-venturediveTests/TestDoubles/GetFilmsUseCaseStub.swift
+    •    learning-development-venturediveTests/Domain/DefaultGetFilmsUseCaseTests.swift
+    •    learning-development-venturediveTests/Domain/DefaultGetFilmDetailUseCaseTests.swift
+    •    learning-development-venturediveTests/Domain/DefaultGetPeopleUseCaseTests.swift
+    •    learning-development-venturediveTests/Presentation/MovieListViewModelTests.swift
+    •    learning-development-venturediveTests/Presentation/MovieDetailViewModelTests.swift
+    •    (Optional) learning-development-venturediveTests/Data/DTOToDomainMappingTests.swift
+
+    2.    Then output paste-ready code file-by-file with headers exactly like:
+// FILE: learning-development-venturediveTests/Presentation/MovieListViewModelTests.swift
+<full code>
+
+App module import
+
+In each test file use:
+@testable import learning_development_venturedive
+
+Test scope
+
+A) Domain Unit Tests (async/await, no networking)
+
+Write XCTest cases for:
+    1.    DefaultGetFilmsUseCase
+    •    Success: returns films from a FilmRepository spy/stub
+    •    Failure: propagates thrown error
+    •    Verify the repository method fetchFilms() was called exactly once
+    2.    DefaultGetFilmDetailUseCase
+    •    Success: returns film from fetchFilmDetail(id:)
+    •    Failure: propagates thrown error
+    •    Verify correct id was passed
+    3.    DefaultGetPeopleUseCase
+    •    Success: returns people from PeopleRepository
+    •    Failure: propagates thrown error
+    •    Verify repository method called once
+
+Use lightweight test doubles (spies/stubs) for FilmRepository and PeopleRepository.
+
+B) Presentation Unit Tests
+
+MovieListViewModel
+
+My current code:
+    •    load() sets state = .loading, then on success sets items, state = .loaded, and calls applyFilter()
+    •    applyFilter() trims whitespace and filters by title, originalTitle, director (case-insensitive)
+    •    Search is bound using Combine:
+$query.debounce(for: .milliseconds(400), scheduler: DispatchQueue.main).removeDuplicates().sink { applyFilter() }
+
+Write tests for:
+    1.    load() success:
+    •    state transitions .idle → .loading → .loaded
+    •    items and filtered contain expected films
+    2.    load() failure:
+    •    state transitions .idle → .loading → .error(String)
+    3.    filtering correctness:
+    •    empty query => filtered == items
+    •    trimming works ("  miyazaki  ")
+    •    case-insensitive match
+    •    matches title/originalTitle/director as implemented
+
+Combine debounce testability (required)
+
+Debounce with DispatchQueue.main will be flaky. Propose the smallest production refactor that keeps runtime behavior the same but allows deterministic tests by injecting:
+    •    a scheduler (preferred), or
+    •    a debounce duration/time provider
+
+Output the minimal production code edits (file-by-file) to MovieListViewModel only (do not alter architecture).
+Then write tests that trigger filtering deterministically without real delays.
+
+MovieDetailViewModel
+
+My current code:
+    •    filmState: LoadState<Film> and castState: LoadState<[Person]>
+    •    load(id:) starts two Tasks:
+    •    loadFilm(id:) → .loading then .loaded(film) or .failed(message)
+    •    loadCast(for:) → calls getPeople.execute(), then filters people whose person.films contains URL "https://ghibliapi.vercel.app/films/<id>"
+
+Write tests for:
+    1.    film success: .idle → .loading → .loaded(film)
+    2.    film failure: .idle → .loading → .failed(message)
+    3.    cast success:
+    •    returns only matching people for the given film id URL
+    •    .idle → .loading → .loaded(filteredCast)
+    4.    cast failure: .idle → .loading → .failed(message)
+
+Use test doubles for GetFilmDetailUseCase and GetPeopleUseCase that return deterministic async results.
+Use XCTestExpectation or await patterns so tests don’t rely on time delays.
+
+C) Optional Data Tests (only if easy)
+
+Add mapping tests:
+    •    FilmDTO.toDomain() maps fields correctly and parses url
+    •    PersonDTO.toDomain() maps films strings to [URL]
+Do NOT call real GhibliAPIClient or network.
+
+Final checklist section
+
+After all files, include:
+    •    How to create the test folders/files in Xcode and ensure they’re in the test target
+    •    How to run tests (⌘U)
+    •    A short list of what each test file verifies
+
+**Result**
+- Unit tests were added across Domain, Presentation, and Data mapping layers using async/await and test doubles. Combine-based search logic was made testable via minimal dependency injection, enabling reliable, non-flaky tests. The final test suite validates use cases, view-model state transitions, filtering logic, and DTO-to-domain mappings while keeping production behavior unchanged.
+
+**Evidence**
+- Recording: testing-prompt-00.mov
+- Screenshot(s): testing-initial-00.png, testing-files-folders.png
+
+---
+
+### Human Intervention & Engineering Decisions
+
+While Xcode AI generated the initial structure and code, several decisions and refinements were made manually:
+
+- Verified and enforced Clean Architecture boundaries between Presentation, Domain, and Data layers
+- Refactored ViewModels to use structured concurrency correctly (async APIs instead of fire-and-forget tasks)
+- Improved testability by injecting scheduler and debounce parameters into Combine pipelines
+- Wrote and adjusted unit tests to ensure deterministic behavior for async/Combine code
+- Reviewed AI-generated code for naming consistency, API correctness, and model alignment
+
+This ensured the final implementation was production-quality, testable, and aligned with best practices.
+
+---
+
+### Prompt Engineering Summary
+
+This project demonstrates effective prompt engineering by:
+- Starting with a high-level architectural prompt
+- Iteratively refining the output through focused follow-up prompts
+- Using AI for generation, debugging, refactoring, and enhancement
+- Guiding the AI with constraints (architecture, concurrency rules, layering)
+- Validating and correcting AI output through testing and manual review
+
+The result is a working, testable application created through deliberate and controlled AI-assisted development rather than passive code generation.

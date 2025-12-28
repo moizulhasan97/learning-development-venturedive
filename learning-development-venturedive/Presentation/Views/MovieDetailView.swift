@@ -35,7 +35,9 @@ struct MovieDetailView: View {
         }
         .background(theme.background.ignoresSafeArea())
         .navigationTitle("Details")
-        .onAppear { vm.load(id: id) }
+        .task(id: id) {
+            await vm.load(id: id)
+        }
         .environment(\.theme, themeManager.current)
     }
 
@@ -48,7 +50,11 @@ struct MovieDetailView: View {
             VStack(alignment: .leading, spacing: theme.spacingS) {
                 Text("Failed to load film").foregroundStyle(theme.primaryText)
                 Text(msg).foregroundStyle(theme.secondaryText)
-                Button("Retry") { vm.load(id: id) }.tint(theme.accent)
+                Button("Retry") {
+                    Task {
+                        await vm.load(id: id)
+                    }
+                }.tint(theme.accent)
             }
         case .loaded(let film):
             VStack(alignment: .leading, spacing: theme.spacingM) {
@@ -75,7 +81,11 @@ struct MovieDetailView: View {
                 VStack(alignment: .leading, spacing: theme.spacingS) {
                     Text("Failed to load cast").foregroundStyle(theme.primaryText)
                     Text(msg).foregroundStyle(theme.secondaryText)
-                    Button("Retry") { vm.load(id: id) }.tint(theme.accent)
+                    Button("Retry") {
+                        Task {
+                            await vm.load(id: id)
+                        }
+                    }.tint(theme.accent)
                 }
             case .loaded(let cast):
                 if cast.isEmpty {

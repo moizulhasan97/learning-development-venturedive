@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		AF8F66332EFA007800964AAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AF3B6A212EF44E96005AD793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF3B6A282EF44E96005AD793;
+			remoteInfo = "learning-development-venturedive";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		AF3B6A292EF44E96005AD793 /* learning-development-venturedive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "learning-development-venturedive.app"; path = "/Users/moiz.hasan/Desktop/Moiz/Projects/learning-development-venturedive/build/Debug-iphoneos/learning-development-venturedive.app"; sourceTree = "<absolute>"; };
+		AF8F65EC2EFA006B00964AAD /* learning-development-venturedive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learning-development-venturedive.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8F662F2EFA007800964AAD /* learning-development-venturediveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "learning-development-venturediveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = "learning-development-venturedive";
 			sourceTree = "<group>";
 		};
+		AF8F66302EFA007800964AAD /* learning-development-venturediveTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "learning-development-venturediveTests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AF3B6A262EF44E96005AD793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF8F662C2EFA007800964AAD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				AF3B6A2B2EF44E96005AD793 /* learning-development-venturedive */,
+				AF8F65EC2EFA006B00964AAD /* learning-development-venturedive.app */,
+				AF8F662F2EFA007800964AAD /* learning-development-venturediveTests.xctest */,
+				AF8F66302EFA007800964AAD /* learning-development-venturediveTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +84,31 @@
 			packageProductDependencies = (
 			);
 			productName = "learning-development-venturedive";
-			productReference = AF3B6A292EF44E96005AD793 /* learning-development-venturedive.app */;
+			productReference = AF8F65EC2EFA006B00964AAD /* learning-development-venturedive.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AF8F662E2EFA007800964AAD /* learning-development-venturediveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF8F66372EFA007800964AAD /* Build configuration list for PBXNativeTarget "learning-development-venturediveTests" */;
+			buildPhases = (
+				AF8F662B2EFA007800964AAD /* Sources */,
+				AF8F662C2EFA007800964AAD /* Frameworks */,
+				AF8F662D2EFA007800964AAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF8F66342EFA007800964AAD /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AF8F66302EFA007800964AAD /* learning-development-venturediveTests */,
+			);
+			name = "learning-development-venturediveTests";
+			packageProductDependencies = (
+			);
+			productName = "learning-development-venturediveTests";
+			productReference = AF8F662F2EFA007800964AAD /* learning-development-venturediveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -73,6 +122,10 @@
 				TargetAttributes = {
 					AF3B6A282EF44E96005AD793 = {
 						CreatedOnToolsVersion = 26.2;
+					};
+					AF8F662E2EFA007800964AAD = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = AF3B6A282EF44E96005AD793;
 					};
 				};
 			};
@@ -91,12 +144,20 @@
 			projectRoot = "";
 			targets = (
 				AF3B6A282EF44E96005AD793 /* learning-development-venturedive */,
+				AF8F662E2EFA007800964AAD /* learning-development-venturediveTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AF3B6A272EF44E96005AD793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF8F662D2EFA007800964AAD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -113,7 +174,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF8F662B2EFA007800964AAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF8F66342EFA007800964AAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF3B6A282EF44E96005AD793 /* learning-development-venturedive */;
+			targetProxy = AF8F66332EFA007800964AAD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AF3B6A322EF44E97005AD793 /* Debug */ = {
@@ -297,6 +373,46 @@
 			};
 			name = Release;
 		};
+		AF8F66352EFA007800964AAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.personal.learning-development-venturediveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/learning-development-venturedive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/learning-development-venturedive";
+			};
+			name = Debug;
+		};
+		AF8F66362EFA007800964AAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.personal.learning-development-venturediveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/learning-development-venturedive.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/learning-development-venturedive";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -314,6 +430,15 @@
 			buildConfigurations = (
 				AF3B6A352EF44E97005AD793 /* Debug */,
 				AF3B6A362EF44E97005AD793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF8F66372EFA007800964AAD /* Build configuration list for PBXNativeTarget "learning-development-venturediveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF8F66352EFA007800964AAD /* Debug */,
+				AF8F66362EFA007800964AAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -29,14 +29,20 @@ final class MovieDetailViewModel: ObservableObject {
         self.getPeople = getPeople
     }
 
-    func load(id: String) {
-        Task {
-            await loadFilm(id: id)
-        }
-        Task {
-            await loadCast(for: id)
-        }
-    }
+//    func load(id: String) {
+//        Task {
+//            await loadFilm(id: id)
+//        }
+//        Task {
+//            await loadCast(for: id)
+//        }
+//    }
+    
+    func load(id: String) async {
+           async let _ = loadFilm(id: id)
+           async let _ = loadCast(for: id)
+           _ = await ((), ())
+       }
 
     private func loadFilm(id: String) async {
         filmState = .loading

@@ -148,3 +148,30 @@ Please update the changes that you have mentioned in the existing files.
 
 **Evidence**
 - Recording: prompt-01-apply-suggested-changes.mov
+
+---
+
+## Human Intervention & Engineering Decisions
+
+While Xcode AI generated the initial structure and code, several decisions and refinements were made manually:
+
+- Verified and enforced Clean Architecture boundaries between Presentation, Domain, and Data layers
+- Refactored ViewModels to use structured concurrency correctly (async APIs instead of fire-and-forget tasks)
+- Improved testability by injecting scheduler and debounce parameters into Combine pipelines
+- Wrote and adjusted unit tests to ensure deterministic behavior for async/Combine code
+- Reviewed AI-generated code for naming consistency, API correctness, and model alignment
+
+This ensured the final implementation was production-quality, testable, and aligned with best practices.
+
+---
+
+## Prompt Engineering Summary
+
+This project demonstrates effective prompt engineering by:
+- Starting with a high-level architectural prompt
+- Iteratively refining the output through focused follow-up prompts
+- Using AI for generation, debugging, refactoring, and enhancement
+- Guiding the AI with constraints (architecture, concurrency rules, layering)
+- Validating and correcting AI output through testing and manual review
+
+The result is a working, testable application created through deliberate and controlled AI-assisted development rather than passive code generation.

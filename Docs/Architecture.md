@@ -55,3 +55,16 @@ Networking uses a typed `APIError` that maps:
 - decoding failures
 
 Presentation surfaces user-friendly messages via view states.
+
+---
+
+## Testability Considerations
+
+To make Combine-based search logic deterministic in unit tests, the ViewModel allows
+injection of the scheduler and debounce interval:
+
+- Production uses `DispatchQueue.main` with a 400ms debounce
+- Unit tests inject a zero debounce interval
+
+This preserves runtime behavior while enabling fast, reliable tests without timing
+or sleep-based assertions.

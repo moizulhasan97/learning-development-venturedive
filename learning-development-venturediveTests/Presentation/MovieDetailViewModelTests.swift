@@ -36,6 +36,7 @@ final class MovieDetailViewModelTests: XCTestCase {
             releaseDate: "",
             runningTime: "",
             rtScore: "",
+            movieBannerURL: nil,
             url: URL(string: "https://ghibliapi.vercel.app/films/f1")!
         )
 
@@ -76,6 +77,7 @@ final class MovieDetailViewModelTests: XCTestCase {
             releaseDate: "",
             runningTime: "",
             rtScore: "",
+            movieBannerURL: nil,
             url: URL(string: "https://ghibliapi.vercel.app/films/f2")!
         )
 
@@ -115,6 +117,7 @@ final class MovieDetailViewModelTests: XCTestCase {
                     releaseDate: "1998",
                     runningTime: "80",
                     rtScore: "90",
+                    movieBannerURL: nil,
                     url: URL(string: "https://ghibliapi.vercel.app/films/4")!
                 )
             )

@@ -286,6 +286,87 @@ After all files, include:
 - Recording: testing-prompt-00.mov
 - Screenshot(s): testing-initial-00.png, testing-files-folders.png
 
+--
+
+## Prompt 6 — List row banner image (movie_banner) + test updates
+
+**Goal**
+Enhance the Movie List UI by showing each film’s `movie_banner` image as a leading thumbnail, while preserving Clean Architecture boundaries and adding deterministic unit test coverage for the new mapping.
+
+**Prompt**
+Update the existing “Ghibli Movie Browser” app to display each film’s ⁠ movie_banner ⁠ image on the leading side of each row in the Movie List.
+
+Hard constraints:
+•⁠  ⁠Keep the existing architecture intact (Presentation / Domain / Data)
+•⁠  ⁠Do NOT introduce new models or rename existing ones
+•⁠  ⁠Do NOT hardcode API URLs in the Presentation layer
+•⁠  ⁠Do NOT add third-party dependencies
+•⁠  ⁠Use async/await for image loading (SwiftUI AsyncImage is fine)
+
+Important:
+The ⁠ movie_banner ⁠ field is NOT currently handled anywhere in the project.
+
+You MUST:
+•⁠  ⁠Add ⁠ movie_banner ⁠ decoding to FilmDTO
+•⁠  ⁠Map it in FilmDTO.toDomain()
+•⁠  ⁠Add a corresponding optional property to the existing Film domain model (e.g. ⁠ movieBannerURL: URL? ⁠)
+•⁠  ⁠Propagate this value through repositories/use cases without breaking existing code
+
+Do NOT:
+•⁠  ⁠Create a new Film model
+•⁠  ⁠Rename Film or introduce a Movie model
+•⁠  ⁠Bypass the Domain layer by using DTOs in Presentation
+
+Requirements:
+
+1) Data layer: decode + map movie_banner
+•⁠  ⁠Update FilmDTO to decode the ⁠ movie_banner ⁠ field from the API response.
+•⁠  ⁠Update FilmDTO.toDomain() to map ⁠ movie_banner ⁠ into the Film domain model.
+•⁠  ⁠Ensure JSON decoding still works for existing fields.
+
+2) Domain layer: add property to Film
+•⁠  ⁠Update the existing Film struct to include an optional banner URL property for movie_banner.
+•⁠  ⁠Keep naming consistent across layers (FilmDTO → Film).
+•⁠  ⁠Ensure the change does not break existing initializers/usages (update init call sites as needed).
+
+3) Presentation layer: show image in list row with fallback
+•⁠  ⁠In MovieListView’s FilmRow, add a leading thumbnail image sourced from ⁠ film.movieBannerURL ⁠.
+•⁠  ⁠Use a clean row layout: thumbnail leading, text content trailing.
+•⁠  ⁠If the banner URL is nil OR not a valid http/https URL OR the image fails to load, show a suitable built-in iOS placeholder image (SF Symbol like ⁠ film ⁠ or ⁠ photo ⁠) styled using the existing Theme tokens (no hardcoded colors).
+
+4) “Broken URL” handling via extension (required)
+•⁠  ⁠Add a URL validation helper using an extension (in Core or Presentation), for example:
+  - ⁠ URL.isHTTPURL ⁠ (true only for http/https)
+•⁠  ⁠Use this extension before attempting to load the remote image.
+•⁠  ⁠For actual load failures (AsyncImage error phase), fall back to the placeholder UI.
+
+5) Update Unit Tests accordingly (required)
+•⁠  ⁠Update any existing tests that construct Film instances to include the new ⁠ movieBannerURL ⁠ parameter (or adapt to the updated initializer if it changes).
+•⁠  ⁠Update DTO mapping unit tests to validate ⁠ movie_banner ⁠ mapping:
+  - FilmDTO.movie_banner string → Film.movieBannerURL (URL?) parsing
+  - Ensure nil or invalid URL strings map to nil safely (no crashes).
+•⁠  ⁠If any view-model tests use FilmDTO or hardcoded Film fixtures, keep naming consistent (Film/Person only) and update fixtures to compile.
+•⁠  ⁠Do NOT add UI snapshot tests or network tests; keep tests deterministic and unit-level only.
+
+Output instructions (VERY IMPORTANT):
+1) First output a list of every file you will add
+   - Core/Extensions/URL+Validation.swift (new)
+
+Final requirement:
+•⁠  ⁠Ensure the app compiles and runs after the changes.
+•⁠  ⁠Ensure the unit tests compile and pass after the changes.
+•⁠  ⁠Keep Theme tokens in use throughout (no hardcoded colors).
+
+
+**Result**
+- Added support for decoding `movie_banner` in `FilmDTO` and mapping it to Domain (`Film.movieBannerURL`).
+- Updated Movie List row UI to show a leading thumbnail using `AsyncImage`.
+- Implemented safe fallback: invalid/broken URL shows a built-in SF Symbol placeholder styled via Theme tokens.
+- Added/updated unit tests to cover `movie_banner` DTO→Domain mapping and updated any Film fixtures to compile with the new model property.
+
+**Evidence**
+- Recording: listing-view-image-prompt.mov
+
 ---
 
 ### Human Intervention & Engineering Decisions

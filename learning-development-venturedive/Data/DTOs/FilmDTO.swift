@@ -17,6 +17,7 @@ struct FilmDTO: Decodable {
     let release_date: String
     let running_time: String
     let rt_score: String
+    let movie_banner: String?
     let url: String?
 }
 
@@ -32,6 +33,7 @@ extension FilmDTO {
             releaseDate: release_date,
             runningTime: running_time,
             rtScore: rt_score,
+            movieBannerURL: movie_banner.flatMap(URL.init(string:)),
             url: url.flatMap(URL.init(string:))
         )
     }

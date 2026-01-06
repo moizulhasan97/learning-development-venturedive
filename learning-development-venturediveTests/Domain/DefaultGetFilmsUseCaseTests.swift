@@ -22,6 +22,7 @@ final class DefaultGetFilmsUseCaseTests: XCTestCase {
                 releaseDate: "2001",
                 runningTime: "125",
                 rtScore: "97",
+                movieBannerURL: nil,
                 url: .init(string: "https://ghibliapi.vercel.app/films/1")!
             )
         ]

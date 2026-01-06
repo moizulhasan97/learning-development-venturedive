@@ -23,6 +23,7 @@ final class DefaultGetFilmDetailUseCaseTests: XCTestCase {
             releaseDate: "1988",
             runningTime: "86",
             rtScore: "95",
+            movieBannerURL: nil,
             url: URL(string: "https://ghibliapi.vercel.app/films/42")!
         )
         spy.filmDetailResult = .success(expected)
@@ -50,3 +51,4 @@ final class DefaultGetFilmDetailUseCaseTests: XCTestCase {
         XCTAssertEqual(spy.fetchFilmDetailReceivedID, "x")
     }
 }
+

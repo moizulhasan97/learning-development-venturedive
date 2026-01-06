@@ -122,14 +122,51 @@ private struct FilmRow: View {
     @Environment(\.theme) private var theme
     let film: Film
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacingS) {
-            Text(film.title)
-                .font(theme.subtitleFont)
-                .foregroundStyle(theme.primaryText)
-            Text(film.originalTitle)
-                .font(.caption)
-                .foregroundStyle(theme.secondaryText)
+        HStack(alignment: .center, spacing: theme.spacingM) {
+            thumbnail
+                .frame(width: 72, height: 44)
+                .clipShape(RoundedRectangle(cornerRadius: theme.cornerRadius/2))
+            VStack(alignment: .leading, spacing: theme.spacingS) {
+                Text(film.title)
+                    .font(theme.subtitleFont)
+                    .foregroundStyle(theme.primaryText)
+                Text(film.originalTitle)
+                    .font(.caption)
+                    .foregroundStyle(theme.secondaryText)
+            }
+            Spacer()
         }
         .padding(.vertical, theme.spacingS)
+    }
+
+    @ViewBuilder
+    private var thumbnail: some View {
+        if let url = film.movieBannerURL, url.isHTTPURL {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .empty:
+                    placeholder
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                case .failure:
+                    placeholder
+                @unknown default:
+                    placeholder
+                }
+            }
+        } else {
+            placeholder
+        }
+    }
+
+    private var placeholder: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: theme.cornerRadius/2)
+                .fill(theme.separator.opacity(0.3))
+            Image(systemName: "film")
+                .foregroundStyle(theme.secondaryText)
+        }
     }
 }

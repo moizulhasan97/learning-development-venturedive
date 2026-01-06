@@ -22,6 +22,7 @@ final class DTOToDomainMappingTests: XCTestCase {
                 release_date: "2001",
                 running_time: "125",
                 rt_score: "97",
+                movie_banner: "https://example.com/banner.jpg",
                 url: "https://ghibliapi.vercel.app/films/1"
             )
 
@@ -40,6 +41,7 @@ final class DTOToDomainMappingTests: XCTestCase {
                 film.url?.absoluteString,
                 "https://ghibliapi.vercel.app/films/1"
             )
+            XCTAssertEqual(film.movieBannerURL?.absoluteString, "https://example.com/banner.jpg")
         }
 
     func test_PersonDTO_toDomain_mapsFilmsToURLs() {
@@ -68,4 +70,17 @@ final class DTOToDomainMappingTests: XCTestCase {
             ]
         )
     }
+
+    func test_FilmDTO_movieBanner_invalid_or_nil_mapsToNil() {
+        let dto1 = FilmDTO(
+            id: "1", title: "A", original_title: "B", description: "C", director: "D", producer: "E", release_date: "2000", running_time: "100", rt_score: "90", movie_banner: nil, url: nil
+        )
+        XCTAssertNil(dto1.toDomain().movieBannerURL)
+
+        let dto2 = FilmDTO(
+            id: "2", title: "A", original_title: "B", description: "C", director: "D", producer: "E", release_date: "2000", running_time: "100", rt_score: "90", movie_banner: "", url: nil
+        )
+        XCTAssertNil(dto2.toDomain().movieBannerURL)
+    }
 }
+

@@ -9,6 +9,8 @@ prompt-01-apply-suggested-changes.mov — Prompt 4: apply suggested changes
 app-demo-01.mov — App Demo: list load → debounced search → detail → cast → theme switch
 app-demo-no-internet.mov — App Demo: No internet connection → Internet connection restored 
 testing-prompt-00.mov - Prompt 5: add unit tests
+listing-view-image-prompt.mov - Prompt 6: add support for `movie_banner` image
+visual-improvement.mov - Prompt 7: visual enhancement - skeleton and stretchy header view
 
 ## Screenshots
 blank-project-00.png — dummy/skeleton project

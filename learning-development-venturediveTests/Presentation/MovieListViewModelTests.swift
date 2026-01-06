@@ -24,6 +24,7 @@ final class MovieListViewModelTests: XCTestCase {
                 releaseDate: "1990",
                 runningTime: "120",
                 rtScore: "80",
+                movieBannerURL: nil,
                 url: URL(string: "https://ghibliapi.vercel.app/films/1")!
             ),
             Film(
@@ -36,6 +37,7 @@ final class MovieListViewModelTests: XCTestCase {
                 releaseDate: "1992",
                 runningTime: "120",
                 rtScore: "82",
+                movieBannerURL: nil,
                 url: URL(string: "https://ghibliapi.vercel.app/films/2")!
             ),
             Film(
@@ -48,6 +50,7 @@ final class MovieListViewModelTests: XCTestCase {
                 releaseDate: "1991",
                 runningTime: "120",
                 rtScore: "83",
+                movieBannerURL: nil,
                 url: URL(string: "https://ghibliapi.vercel.app/films/3")!
             )
             
@@ -127,3 +130,4 @@ final class MovieListViewModelTests: XCTestCase {
         XCTAssertTrue(sut.filtered.isEmpty)
     }
 }
+

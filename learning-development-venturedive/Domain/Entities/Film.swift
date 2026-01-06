@@ -17,9 +17,10 @@ public struct Film: Identifiable, Equatable, Sendable {
     public let releaseDate: String
     public let runningTime: String
     public let rtScore: String
+    public let movieBannerURL: URL?
     public let url: URL?
 
-    public init(id: String, title: String, originalTitle: String, description: String, director: String, producer: String, releaseDate: String, runningTime: String, rtScore: String, url: URL?) {
+    public init(id: String, title: String, originalTitle: String, description: String, director: String, producer: String, releaseDate: String, runningTime: String, rtScore: String, movieBannerURL: URL?, url: URL?) {
         self.id = id
         self.title = title
         self.originalTitle = originalTitle
@@ -29,6 +30,7 @@ public struct Film: Identifiable, Equatable, Sendable {
         self.releaseDate = releaseDate
         self.runningTime = runningTime
         self.rtScore = rtScore
+        self.movieBannerURL = movieBannerURL
         self.url = url
     }
 }

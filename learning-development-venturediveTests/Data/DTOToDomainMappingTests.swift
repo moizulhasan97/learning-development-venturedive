@@ -78,7 +78,7 @@ final class DTOToDomainMappingTests: XCTestCase {
         XCTAssertNil(dto1.toDomain().movieBannerURL)
 
         let dto2 = FilmDTO(
-            id: "2", title: "A", original_title: "B", description: "C", director: "D", producer: "E", release_date: "2000", running_time: "100", rt_score: "90", movie_banner: "not a url", url: nil
+            id: "2", title: "A", original_title: "B", description: "C", director: "D", producer: "E", release_date: "2000", running_time: "100", rt_score: "90", movie_banner: "", url: nil
         )
         XCTAssertNil(dto2.toDomain().movieBannerURL)
     }

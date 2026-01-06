@@ -367,6 +367,65 @@ Final requirement:
 **Evidence**
 - Recording: listing-view-image-prompt.mov
 
+--
+
+## Prompt 7 — Visual Enhancements (Stretchy Header + Skeletons + Banner Image)
+
+**Goal**
+Enhance the existing Ghibli Movie Browser with production-quality visuals while keeping architecture, models, and business logic unchanged.  
+This prompt focuses on visual polish, reuse of existing data (`movie_banner`), and SwiftUI-native animations.
+
+**Prompt**
+Enhance the existing “Ghibli Movie Browser” SwiftUI app by adding lightweight, production-quality visual improvements.
+
+Hard constraints:
+- Do NOT change existing architecture (Presentation / Domain / Data)
+- Do NOT introduce new APIs, models, or dependencies
+- Keep all logic inside the Presentation layer
+- Reuse the existing Theme system (no hardcoded colors)
+
+Visual enhancements to add:
+
+1) Skeleton Loading States
+- Replace spinners in the movie list and detail screens with skeleton placeholders
+- Skeletons should match the layout of the final content
+- Show skeletons while data is loading, then transition to real content with animation
+
+2) Movie Detail Visuals — Stretchy Header using movie_banner (required)
+- Add a “stretchy” collapsible/expandable header at the top of the Movie Detail screen (parallax/stretch effect when pulling down)
+- The header MUST display the film’s `movie_banner` image (the same `Film.movieBannerURL` used in the list)
+- Use SwiftUI only (no external libs)
+- If the banner URL is nil/invalid or the image fails to load, fall back to a Theme-styled placeholder (SF Symbol like `film` / `photo`)
+
+3) Score Visualization
+- Visually represent the film’s rtScore using either:
+  - a circular progress ring
+- Animate the score appearance when data loads
+
+4) Subtle Animations
+- Animate transitions between loading → loaded states
+- Add smooth animations when navigating from list → detail
+- Use SwiftUI-native animations only
+
+Implementation notes:
+- All visuals must respect the current Theme tokens (colors, spacing, typography)
+- Keep components reusable and test-friendly (prefer small views like StretchyHeaderView, SkeletonRowView, ScoreView)
+- Do NOT add networking, business logic, or state outside existing ViewModels
+
+Output instructions (VERY IMPORTANT):
+- List the exact files you will add and where they should be placed (relative paths)
+- Clearly indicate which views/components were modified or added
+- Ensure the app still compiles and runs
+
+**Result**
+- Movie list displays banner thumbnails with graceful fallback  
+- Movie detail screen features a stretchy hero header using `movie_banner`  
+- Skeleton loaders replace spinners for a more polished UX  
+- Visual transitions and score animations improve perceived performance  
+
+**Evidence**
+- Recording: visual-improvement.mov
+
 ---
 
 ### Human Intervention & Engineering Decisions

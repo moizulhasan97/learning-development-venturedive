@@ -21,6 +21,7 @@ struct MovieListView: View {
     var body: some View {
         NavigationStack {
             content
+                .animation(.easeInOut, value: vm.state)
                 .navigationTitle("Ghibli Films")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -77,13 +78,17 @@ struct MovieListView: View {
     }
 
     private var loadingView: some View {
-        VStack(spacing: theme.spacingM) {
-            ProgressView().tint(theme.accent)
-            Text("Loading films...")
-                .font(theme.bodyFont)
-                .foregroundStyle(theme.secondaryText)
+        VStack(spacing: 0) {
+            // keep search field space to avoid jump when loaded
+            HStack { RoundedRectangle(cornerRadius: 8).fill(theme.separator.opacity(0.0)).frame(height: 0) }
+            List {
+                ForEach(0..<6, id: \.self) { _ in
+                    SkeletonRowView()
+                        .listRowBackground(theme.background)
+                }
+            }
+            .listStyle(.plain)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(theme.background)
     }
 
@@ -170,3 +175,4 @@ private struct FilmRow: View {
         }
     }
 }
+
